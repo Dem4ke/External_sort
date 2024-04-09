@@ -2,8 +2,8 @@
 #include "Sort.h"
 
 int main() {
-	Settings settings("settings.txt");
-	Sort sort;
+	extSort::Settings settings("settings.txt");
+	extSort::Sort sort;
 
 	// ask to input and output files
 	settings.setFiles();

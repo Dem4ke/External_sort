@@ -1,2 +1,0 @@
-0.1				0.1				0.1				40
-# write delay in seconds	# read delay in seconds		# move delay in seconds		# avalible RAM
