@@ -3,6 +3,9 @@
 namespace extSort {
 
 	void Sort::split(Settings& set, std::string input) {
+		std::ifstream input_;
+		std::ofstream output_;
+
 		// open input file
 		input_.open(set.getResourcesPath() + input);
 		if (!input_) {
@@ -35,6 +38,8 @@ namespace extSort {
 
 	void Sort::selectionSort(Settings& set) {
 		int next = 1;
+		std::ifstream input_;
+		std::ofstream output_;
 
 		while (count_ != 1) {
 			// open file to read to array
@@ -69,6 +74,8 @@ namespace extSort {
 		int filePairs = (count_ + 1);
 		int it = count_ + 1;
 		int limit = count_;
+		std::ifstream input_;
+		std::ofstream output_;
 
 		// create files and write sorted pairs of files in them
 		while (filePairs > 1) {

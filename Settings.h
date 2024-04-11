@@ -23,9 +23,6 @@ namespace extSort {
 		const std::string temporaryPath_ = "tpm/";
 		std::string inputFile_;
 		std::string outputFile_;
-
 		float setArray_[4] = { 0, 0, 0, 0 }; // 0 - write delay, 1 - move delay, 2 - read delay, 3 - max of RAM
-
-		std::ifstream inputSettings_;
 	};
 }

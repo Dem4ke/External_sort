@@ -8,21 +8,22 @@ namespace extSort {
 
 	// set settings from file
 	void Settings::setSettings(const std::string& settings) {
+		std::ifstream inputSettings;
 		// open settings file
-		inputSettings_.open(resourcesPath_ + settings);
+		inputSettings.open(resourcesPath_ + settings);
 
-		if (!inputSettings_) {
+		if (!inputSettings) {
 			std::cerr << "Cannot open settings file\n";
 			return;
 		}
 
 		// input settings in array
 		for (int i = 0; i < 4; ++i) {
-			inputSettings_ >> setArray_[i];
+			inputSettings >> setArray_[i];
 		}
 
 		// close settings file
-		inputSettings_.close();
+		inputSettings.close();
 	}
 
 	// set input and output files

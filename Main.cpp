@@ -1,9 +1,11 @@
 #include "Settings.h"
+#include "Tape.h"
 #include "Sort.h"
 
 int main() {
-	extSort::Settings settings("settings.txt");
-	extSort::Sort sort;
+	extSort::Settings settings{ "settings.txt" };
+	extSort::Tape tape{ settings };
+	extSort::Sort sort{ tape };
 
 	// ask to input and output files
 	settings.setFiles();

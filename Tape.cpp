@@ -2,9 +2,11 @@
 
 namespace extSort {
 
-	Tape::Tape() {
-		set_.setSettings("settings.txt");
-	}
+	void Tape::tapeDelay() {
+       		sleep(set_.getSetArray(0)); // write 
+     		sleep(set_.getSetArray(1)); // move 
+       		sleep(set_.getSetArray(2)); // read
+    	}
 
 	void Tape::moveLeft() {
 		sleep(set_.getSetArray(1));
@@ -21,11 +23,6 @@ namespace extSort {
 		temp_ = *ptr;
 	}
 
-	void Tape::write(int* ptr) {
-		sleep(set_.getSetArray(0));
-		*ptr = temp_;
-	}
-
 	void Tape::splitTape(std::ifstream& input, std::ofstream& output, int it) {
 		while (input >> temp_) {
 			sleep(set_.getSetArray(1));
@@ -40,9 +37,7 @@ namespace extSort {
 
 	void Tape::readTape(std::ifstream& input) {
 		while (input >> temp_) {
-			sleep(set_.getSetArray(2)); // read
-			sleep(set_.getSetArray(0)); // write
-			sleep(set_.getSetArray(1)); // move
+            		tapeDelay();
 			curTape_.push_back(temp_);
 		}
 
@@ -50,10 +45,8 @@ namespace extSort {
 
 	void Tape::writeTape(std::ofstream& output) {
 		for (int& i : curTape_) {
-			sleep(set_.getSetArray(2)); // read
-			sleep(set_.getSetArray(0)); // write
-			sleep(set_.getSetArray(1)); // move
-			output << i << " ";
+			tapeDelay();
+            		output << i << " ";
 		}
 	}
 
@@ -68,15 +61,11 @@ namespace extSort {
 				read(curCell_);
 				moveRight();
 				if (temp_ > *curCell_) {
-					sleep(set_.getSetArray(2));
 					temp1_ = *curCell_;
 					moveLeft();
-					sleep(set_.getSetArray(2));
 					temp2_ = *curCell_;
-					sleep(set_.getSetArray(0));
 					*curCell_ = temp1_;
 					moveRight();
-					sleep(set_.getSetArray(0));
 					*curCell_ = temp2_;
 
 					maxIndex = i;
@@ -97,29 +86,21 @@ namespace extSort {
 
 	void Tape::mergeTwoTapes(std::ifstream& input1, std::ifstream& input2, std::ofstream& output) {
 		input1 >> temp1_;
-		sleep(set_.getSetArray(2)); // read
-		sleep(set_.getSetArray(0)); // write
-		sleep(set_.getSetArray(1)); // move
-		input2 >> temp2_;
-		sleep(set_.getSetArray(2)); // read
-		sleep(set_.getSetArray(0)); // write
-		sleep(set_.getSetArray(1)); // move
+		tapeDelay();
+       		input2 >> temp2_;
+        	tapeDelay();
 
 		while (input1 && input2) {
 
 			if (temp1_ < temp2_) {
 				output << temp1_ << " ";
 				input1 >> temp1_;
-				sleep(set_.getSetArray(2)); // read
-				sleep(set_.getSetArray(0)); // write
-				sleep(set_.getSetArray(1)); // move
+                		tapeDelay();
 			}
 			else {
 				output << temp2_ << " ";
 				input2 >> temp2_;
-				sleep(set_.getSetArray(2)); // read
-				sleep(set_.getSetArray(0)); // write
-				sleep(set_.getSetArray(1)); // move
+                		tapeDelay();
 			}
 		}
 
@@ -127,25 +108,19 @@ namespace extSort {
 		while (input1) {
 			output << temp1_ << " ";
 			input1 >> temp1_;
-			sleep(set_.getSetArray(2)); // read
-			sleep(set_.getSetArray(0)); // write
-			sleep(set_.getSetArray(1)); // move
+            		tapeDelay();
 		}
 		while (input2) {
 			output << temp2_ << " ";
 			input2 >> temp2_;
-			sleep(set_.getSetArray(2)); // read
-			sleep(set_.getSetArray(0)); // write
-			sleep(set_.getSetArray(1)); // move
+            		tapeDelay();
 		}
 	}
 
 	void Tape::cloneTape(std::ifstream& input, std::ofstream& output) {
 		while (input >> temp1_) {
 			output << temp1_ << " ";
-			sleep(set_.getSetArray(2)); // read
-			sleep(set_.getSetArray(0)); // write
-			sleep(set_.getSetArray(1)); // move
+            		tapeDelay();
 		}
 	}
 }
